@@ -1,0 +1,30 @@
+{
+  "name":"telnyx-ivr-example",
+  "scripts":{},
+  "env":{
+    "APPLICATION_HOST":{
+      "required":true
+    },
+    "HEROKU_APP_NAME": {
+      "required":true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required":true
+    },
+    "RACK_ENV":{
+      "required":true
+    },
+    "SECRET_KEY_BASE":{
+      "generator":"secret"
+    },
+    "TELNYX_MESSAGING_PROFILE_SECRET":{
+      "required":true
+    },
+    "TELNYX_TELEPHONE_NUMBER":{
+      "required":true
+    }
+  },
+  "addons":[
+    "heroku-postgresql"
+  ]
+}
