@@ -10,29 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309000602) do
+ActiveRecord::Schema.define(version: 20180702180101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "anonymized_connections", force: :cascade do |t|
-    t.integer  "user1_id"
-    t.integer  "user2_id"
-    t.string   "telephone_number"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["telephone_number"], name: "index_anonymized_connections_on_telephone_number", using: :btree
-    t.index ["user1_id"], name: "index_anonymized_connections_on_user1_id", using: :btree
-    t.index ["user2_id"], name: "index_anonymized_connections_on_user2_id", using: :btree
+  create_table "calls", force: :cascade do |t|
+    t.string "call_control_id"
+    t.string "from"
+    t.string "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "telephone_number"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["telephone_number"], name: "index_users_on_telephone_number", using: :btree
-  end
-
-  add_foreign_key "anonymized_connections", "users", column: "user1_id"
-  add_foreign_key "anonymized_connections", "users", column: "user2_id"
 end
