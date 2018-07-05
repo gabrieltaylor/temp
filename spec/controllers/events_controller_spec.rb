@@ -11,7 +11,7 @@ describe EventsController do
       @call_control_id = @params["payload"]["call_control_id"]
     end
 
-    it "should answer call" do  
+    it "should answer call" do
       expect_any_instance_of(TelnyxClient).to receive(:answer_call).with(@call_control_id)
       post :handle_event, params: @params
     end
@@ -25,7 +25,7 @@ describe EventsController do
 
     it "should playback audio" do
       expect_any_instance_of(TelnyxClient).to receive(:play_audio)
-        .with(@call_control_id, ENV['VOICE_TRACK_URL'])
+        .with(@call_control_id, ENV['IVR_MENU_URL'])
       post :handle_event, params: @params
     end
   end
@@ -52,7 +52,7 @@ describe EventsController do
     it "should playback audio when digit is unknown" do
       @params["payload"]["digit"] = "9"
       expect_any_instance_of(TelnyxClient).to receive(:play_audio)
-        .with(@call_control_id, ENV['VOICE_TRACK_URL'])
+        .with(@call_control_id, ENV['IVR_MENU_URL'])
       post :handle_event, params: @params
     end
   end

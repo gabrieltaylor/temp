@@ -2,18 +2,32 @@
 
 ## How it works?
 
-Before setting up, it's better to understand how this application works. The main purpose is to execute a serie of commands that a normal IVR would do. Bellow you can find the implemented steps and the sequence that they will happen.
+This application demonstrates a simple interactive voice response (IVR) system,
+built using the call control features of Telnyx's API. Call control is
+essentially a collection of commands triggered by your application and events
+that occur on the call as a result of actions of the caller or callee or of a
+command.
 
-1. Receive a `Call Initiated` event. Every time we receive a call to one number binded to a call control connection, we are going to receive this event.
-2. Issue an `Answer call` command. This command will say to call control that we want to answer the received call.
-3. Receive a `Call Answered` event. Every time a call is answered, call control will send us this event.
-4. Issue a `Play audio URL` command. Since the call was successfully answered, this command will say to call control to play our IVR options to the caller.
+This IVR represents a flow with which we are all familiar: the customer places
+a call to a company which is immediately answered and an audio menu is played to
+the caller allowing them to select the department they need from a list.
+
+Using call control that flow looks like:
+
+1. Receive a `Call Initiated` event. This will occur when we receive a call
+to a number associated with a call control connection.
+2. Issue an `Answer call` command, instructing call control to answer the
+call.
+3. Receive a `Call Answered` event, verifying the call has been answered.
+4. Issue a `Play audio URL` command, playing our audio menu to the caller and
+instructing them to select an option by pressing a digit.
 5. Caller press a digit.
-6. Receive a `DTMF` event containing the pressed digit. We are going to receive this event every time the caller press a digit during the call.
-7. Act accordingly the desired option
-	* if digit is `1` then the call is transfered to our imaginary support number
-	* if digit is `2` then we hangup the call
-	* any other digit we are going back to `step 4` again
+6. Receive a `DTMF` event containing the pressed digit. We will receive
+this event every time the caller press a digit during the call.
+7. Perform an action based on the digit pressed by the caller:
+	* if the digit is `1`, the call is transfered to our imaginary support number
+	* if the digit is `2`, hangup the call
+	* if any other digit is pressed, return to `step 4` and replay the audio menu.
 
 ## Getting Started
 
@@ -31,20 +45,27 @@ After setting up, you can run the application using [Heroku Local]:
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
 ## Configuration
-To be able to make requests to the Telnyx's API the following environment variables must be present. You can find these credential in the Telnyx Portal on the Auth section.
+In order to use the Telnyx API the following environment variables must be
+present. You can find these credential in the Telnyx Portal
+under the Auth section.
 
 ```
-TELNYX_API_URL=https://api.telnyx.com
 TELNYX_API_KEY=my-telnyx-access-key
 TELNYX_API_SECRET=my-telnyx-token
 ```
 
-This project also rely on two more variables. First one is `VOICE_TRACK_URL` that needs to point to a `.wav` or `.mp3` audio with the IVR instructions to be played when the call is answered.
+You also need to set the `SUPPORT_PHONE_NUMBER` environment variable which will
+be the number of the support department in the IVR. If the caller selects the
+support option from the audio menu, the call will be transfered to this number.
 
-The second one is `SUPPORT_PHONE_NUMBER` which will the number of our imaginary support sector. If the caller decides to talk with the support, the call will be transfered to the number.
+You may also specify a custom file for the audio menu by setting the
+`IVR_MENU_URL` environment variable. This url must point to a publicly
+accessible audio file of either `.wav` or `.mp3` format.
+
+### Example
 
 ```
-VOICE_TRACK_URL=https://9999999.ngrok.io/audios/ivr
+IVR_MENU_URL=https://9999999.ngrok.io/audios/ivr
 SUPPORT_PHONE_NUMBER=+19999999999
 ```
 

@@ -17,10 +17,10 @@
     "SECRET_KEY_BASE":{
       "generator":"secret"
     },
-    "TELNYX_MESSAGING_PROFILE_SECRET":{
+    "TELNYX_API_KEY":{
       "required":true
     },
-    "TELNYX_TELEPHONE_NUMBER":{
+    "TELNYX_API_SECRET":{
       "required":true
     }
   },

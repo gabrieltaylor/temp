@@ -1,10 +1,10 @@
 class TelnyxClient
   include HTTParty
-  base_uri ENV['TELNYX_API_URL']
-  headers 'Accept' => 'application/json'
+  base_uri "https://api.telnyx.com"
+  headers "Accept" => "application/json"
 
   def initialize
-    @auth = {username: ENV['TELNYX_API_KEY'], password: ENV['TELNYX_API_SECRET']}
+    @auth = {username: ENV["TELNYX_API_KEY"], password: ENV["TELNYX_API_SECRET"]}
   end
 
   def answer_call(call_control_id)

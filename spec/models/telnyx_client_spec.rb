@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe TelnyxClient do
   let(:client) {TelnyxClient.new}
@@ -27,10 +27,10 @@ describe TelnyxClient do
   end
 
   def stub_telnyx_request(call_control_id, action, body = "null")
-    encoded = Base64.strict_encode64("#{ENV['TELNYX_API_KEY']}:#{ENV['TELNYX_API_SECRET']}")
-    headers = {'Accept'=>'application/json', 'Authorization'=>"Basic #{encoded}"}
-    
-    stub_request(:post, ENV['TELNYX_API_URL'] + "/calls/#{call_control_id}/actions/#{action}")
+    encoded = Base64.strict_encode64("#{ENV["TELNYX_API_KEY"]}:#{ENV["TELNYX_API_SECRET"]}")
+    headers = {"Accept"=>"application/json", "Authorization"=>"Basic #{encoded}"}
+
+    stub_request(:post, "https://api.telnyx.com/calls/#{call_control_id}/actions/#{action}")
       .with(body: body, headers: headers)
       .to_return(status: 200, body: "", headers: {})
   end
