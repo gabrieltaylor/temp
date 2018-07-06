@@ -26,6 +26,12 @@ describe TelnyxClient do
     client.play_audio call_control_id, "some-url"
   end
 
+  it "should properly call gather action" do
+    body = {audio_url: "some-url", min: 1, max: 1, timeout: 5_000}.to_json
+    stub_telnyx_request call_control_id, "gather", body
+    client.gather call_control_id, "some-url", {min: 1, max: 1, timeout: 5_000}
+  end
+
   def stub_telnyx_request(call_control_id, action, body = "null")
     encoded = Base64.strict_encode64("#{ENV["TELNYX_API_KEY"]}:#{ENV["TELNYX_API_SECRET"]}")
     headers = {"Accept"=>"application/json", "Authorization"=>"Basic #{encoded}"}

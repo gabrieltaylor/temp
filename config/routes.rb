@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
   post 'events', to: 'events#handle_event'
-  get 'audios/ivr', to: 'audios#ivr'
+  get 'files/ivr_menu', to: 'files#ivr_menu'
   
 end

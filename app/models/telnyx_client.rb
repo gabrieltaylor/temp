@@ -25,6 +25,12 @@ class TelnyxClient
     call_action("playback_start", call_control_id, body)
   end
 
+  def gather(call_control_id, audio_url, opts = {})
+    body = {audio_url: audio_url}
+    body.merge!(opts)
+    call_action("gather", call_control_id, body)
+  end
+
   private
 
     def call_action(action, call_control_id, body = nil)
