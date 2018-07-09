@@ -14,7 +14,7 @@ class Call < ApplicationRecord
     end
   end
 
-  validates :from, :to, :call_control_id, :status, presence: true
+  validates :from, :to, :call_control_id, :call_leg_id, :status, presence: true
   validates_inclusion_of :status, :in => EVENT_TYPE_TO_STATUS_MAPPING.values
 
   def self.build(event)
@@ -24,6 +24,7 @@ class Call < ApplicationRecord
       from: payload[:from], 
       to: payload[:to], 
       call_control_id: payload[:call_control_id], 
+      call_leg_id: payload[:call_leg_id],
       status: status
     )
   end

@@ -16,14 +16,13 @@ Using call control that flow looks like:
 
 1. Receive a `Call Initiated` event. This will occur when we receive a call
 to a number associated with a call control connection.
-2. Issue an `Answer call` command, instructing call control to answer the
+2. Issue an `Answer Call` command, instructing call control to answer the
 call.
 3. Receive a `Call Answered` event, verifying the call has been answered.
-4. Issue a `Play audio URL` command, playing our audio menu to the caller and
+4. Issue a `Gather` command, playing our audio menu to the caller and
 instructing them to select an option by pressing a digit.
 5. Caller press a digit.
-6. Receive a `DTMF` event containing the pressed digit. We will receive
-this event every time the caller press a digit during the call.
+6. Receive a `Gather Ended` event containing the pressed digit.
 7. Perform an action based on the digit pressed by the caller:
 	* if the digit is `1`, the call is transfered to our imaginary support number
 	* if the digit is `2`, hangup the call

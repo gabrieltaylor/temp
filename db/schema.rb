@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(version: 20180705205954) do
     t.string "to", null: false
     t.string "status", null: false
     t.string "call_control_id", null: false
+    t.string "call_leg_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["call_control_id"], name: "index_calls_on_call_control_id"
+    t.index ["call_control_id"], name: "index_calls_on_call_leg_id"
   end
 
 end

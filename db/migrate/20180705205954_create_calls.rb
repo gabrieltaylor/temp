@@ -5,7 +5,8 @@ class CreateCalls < ActiveRecord::Migration[5.1]
       t.string :to, null: false
       t.string :status, null: false
       t.string :call_control_id, null: false
-      t.index :call_control_id
+      t.string :call_leg_id, null: false
+      t.index :call_leg_id
 
       t.timestamps
     end

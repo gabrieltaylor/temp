@@ -34,12 +34,12 @@ describe EventsController do
 
     after do
       @call.reload
-      expect(@call.status).to eq("answered")
+      expect(@call.status).to eq("awaiting_gather_end")
     end
 
     it "should issue gather command" do
       expect_any_instance_of(TelnyxClient).to receive(:gather)
-        .with(@call_control_id, ENV['IVR_MENU_URL'], {max: 1, timeout: 10_000})
+        .with(@call_control_id, ENV['IVR_MENU_URL'], {max: 1, timeout: 10_000, valid_digits: "12"})
       post :handle_event, params: @params
     end
   end
@@ -64,13 +64,6 @@ describe EventsController do
     it "should hangup call when digit is 2" do
       @params[:payload][:digits] = "2"
       expect_any_instance_of(TelnyxClient).to receive(:hangup_call).with(@call_control_id)
-      post :handle_event, params: @params
-    end
-
-    it "should issue gather command when digit is unknown" do
-      @params[:payload][:digits] = "9"
-      expect_any_instance_of(TelnyxClient).to receive(:gather)
-        .with(@call_control_id, ENV['IVR_MENU_URL'], {max: 1, timeout: 10_000})
       post :handle_event, params: @params
     end
   end
