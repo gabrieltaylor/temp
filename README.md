@@ -70,8 +70,25 @@ SUPPORT_PHONE_NUMBER=+19999999999
 
 ## Deploying
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+### Staging
+
 If you have previously run the `./bin/setup` script,
-you can deploy to staging and production with:
+run the `./bin/setup_heroku` script to create the staging Heroku App.
+You can deploy to staging:
 
     % ./bin/deploy staging
+
+### Production
+
+To deploy to production `export ENVIRONMENT=production` and run the `./bin/setup_heroku`
+again.
+
     % ./bin/deploy production
+
+### Post deploy setup
+
+Run `heroku info -s | grep web_url | cut -d= -f2`. This is the URL of your application running on Heroku.
+Append `/events` to the URL and set this as the callback URL on your call control connection. You can do
+this through the [Mission Control Portal](https://portal.telnyx.com).
