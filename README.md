@@ -64,7 +64,7 @@ accessible audio file of either `.wav` or `.mp3` format.
 ### Example
 
 ```
-IVR_MENU_URL=https://9999999.ngrok.io/audios/ivr_menu
+IVR_MENU_URL=https://9999999.ngrok.io/files/ivr_menu
 SUPPORT_PHONE_NUMBER=+19999999999
 ```
 

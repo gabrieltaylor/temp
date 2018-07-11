@@ -21,9 +21,9 @@ class Call < ApplicationRecord
     payload = event[:payload]
     status = EVENT_TYPE_TO_STATUS_MAPPING[event[:event_type]]
     Call.new(
-      from: payload[:from], 
-      to: payload[:to], 
-      call_control_id: payload[:call_control_id], 
+      from: payload[:from],
+      to: payload[:to],
+      call_control_id: payload[:call_control_id],
       call_leg_id: payload[:call_leg_id],
       status: status
     )
