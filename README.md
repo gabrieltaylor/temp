@@ -4,9 +4,9 @@
 
 This application demonstrates a simple interactive voice response (IVR) system,
 built using the call control features of Telnyx's API. Call control is
-essentially a collection of commands triggered by your application and events
-that occur on the call as a result of actions of the caller or callee or of a
-command.
+essentially a collection of commands that can be triggered by your application
+and events that occur on the call as a result of actions of the caller or callee
+or of a command.
 
 This IVR represents a flow with which we are all familiar: the customer places
 a call to a company which is immediately answered and an audio menu is played to
@@ -37,15 +37,32 @@ with the necessary dependencies to run and test this app:
 
 It assumes you have a machine equipped with Ruby, Postgres, etc.
 
+If you want to deploy on heroku you also need to have installed and
+configured the [heroku cli](https://devcenter.heroku.com/articles/heroku-cli).
+
 After setting up, you can run the application using [Heroku Local]:
 
     % heroku local
 
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
+or by exporting the environment variables and running:
+
+    % rails s
+
+## Setting up Call Control
+
+Now that you have the repo downloaded and dependencies installed, you need to
+set up a call control connection and associate a telephone number and outbound
+profile with that connection.
+
+You can set these up using the [Telnyx Mission Control Portal](https://portal.telnyx.com) or
+using the API by following the instructions in the
+[Telnyx Developer Docs](https://developers.telnyx.com/docs/call-control).
+
 ## Configuration
 In order to use the Telnyx API the following environment variables must be
-present. You can find these credential in the Telnyx Portal
+present. You can find these credential in the [Mission Control Portal](https://portal.telnyx.com)
 under the Auth section.
 
 ```
@@ -68,7 +85,19 @@ IVR_MENU_URL=https://9999999.ngrok.io/files/ivr_menu
 SUPPORT_PHONE_NUMBER=+19999999999
 ```
 
-## Deploying
+For local development we recommend setting these values in the `.env` file.
+Values in this file will be automatically exported when you use `heroku local`,
+If you're not using heroku we recommend using [forego](https://github.com/ddollar/forego)
+to export your environment variables by running `forego run rails s`.
+
+We strongly recommend you DO NOT commit changes to this file to source control
+as this could expose your credentials if your source control service is compromised.
+
+## Running locally
+If running the application locally you will need to expose your application via a proxy so
+that we can send you events. You can
+
+## Deploying to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -83,7 +112,7 @@ You can deploy to staging:
 ### Production
 
 To deploy to production `export ENVIRONMENT=production` and run the `./bin/setup_heroku`
-again.
+again then run:
 
     % ./bin/deploy production
 

@@ -1,7 +1,7 @@
 module CallControl
   class TelnyxClient
     include HTTParty
-    base_uri "https://apidev.telnyx.com"
+    base_uri "https://api.telnyx.com"
     headers "Accept" => "application/json"
 
     def initialize
