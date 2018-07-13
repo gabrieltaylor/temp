@@ -1,5 +1,5 @@
 module CallControl::Actions
-  class GatherDigits < Call
+  class GatherDigits < Command
     def execute event, call
       telnyx_client.gather(call.call_control_id, audio_url, max: 1, timeout: 10_000, valid_digits: "12")
     end

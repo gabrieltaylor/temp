@@ -1,7 +1,7 @@
 require "rails_helper"
 
-describe TelnyxClient do
-  let(:client) {TelnyxClient.new}
+describe CallControl::TelnyxClient do
+  let(:client) {CallControl::TelnyxClient.new}
   let(:call_control_id) {SecureRandom.uuid}
 
   it "should properly call answer action" do

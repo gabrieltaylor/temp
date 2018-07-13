@@ -1,5 +1,5 @@
-module CallControl
-  class Actions::Call
+module CallControl::Actions
+  class Command
     def perform event
       call = load_call(event)
       if valid?(event, call)
@@ -31,15 +31,15 @@ module CallControl
     end
 
     def telnyx_client
-      @telnyx_client ||= TelnyxClient.new
+      @telnyx_client ||= ::CallControl::TelnyxClient.new
     end
 
     private
-      def update_call_status(call)
-        if call_status_after_execution
-          call.status = call_status_after_execution
-          call.save!
-        end
+    def update_call_status(call)
+      if call_status_after_execution
+        call.status = call_status_after_execution
+        call.save!
       end
+    end
   end
 end

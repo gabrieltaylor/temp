@@ -19,7 +19,7 @@ describe EventsController do
     end
 
     it "should answer call and change status to initiated" do
-      expect_any_instance_of(TelnyxClient).to receive(:answer_call).with(@call_control_id)
+      expect_any_instance_of(CallControl::TelnyxClient).to receive(:answer_call).with(@call_control_id)
       post :handle_event, params: @params
     end
   end
@@ -38,7 +38,7 @@ describe EventsController do
     end
 
     it "should issue gather command" do
-      expect_any_instance_of(TelnyxClient).to receive(:gather)
+      expect_any_instance_of(CallControl::TelnyxClient).to receive(:gather)
         .with(@call_control_id, ENV['IVR_MENU_URL'], {max: 1, timeout: 10_000, valid_digits: "12"})
       post :handle_event, params: @params
     end
@@ -56,14 +56,14 @@ describe EventsController do
 
     it "should transfer call to support when digit is 1" do
       @params[:payload][:digits] = "1"
-      expect_any_instance_of(TelnyxClient).to receive(:transfer_call)
+      expect_any_instance_of(CallControl::TelnyxClient).to receive(:transfer_call)
         .with(@call_control_id, @params[:payload][:to], ENV['SUPPORT_PHONE_NUMBER'])
       post :handle_event, params: @params
     end
 
     it "should hangup call when digit is 2" do
       @params[:payload][:digits] = "2"
-      expect_any_instance_of(TelnyxClient).to receive(:hangup_call).with(@call_control_id)
+      expect_any_instance_of(CallControl::TelnyxClient).to receive(:hangup_call).with(@call_control_id)
       post :handle_event, params: @params
     end
   end
@@ -79,7 +79,7 @@ describe EventsController do
     end
 
     it "should do nothing" do
-      expect_any_instance_of(TelnyxClient).not_to receive(:transfer_call)
+      expect_any_instance_of(CallControl::TelnyxClient).not_to receive(:transfer_call)
       @params[:payload][:digit] = "1"
       post :handle_event, params: @params
     end

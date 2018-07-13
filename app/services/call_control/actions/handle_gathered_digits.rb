@@ -1,5 +1,5 @@
 module CallControl::Actions
-  class HandleGatheredDigits < Call
+  class HandleGatheredDigits < Command
     def execute event, call
       case event.require(:payload).require(:digits)
       when "1"

@@ -1,5 +1,5 @@
 module CallControl::Actions
-  class FinishCall < Call
+  class FinishCall < Command
     def valid? event, call
       not call.finished?
     end

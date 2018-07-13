@@ -1,5 +1,5 @@
 module CallControl::Actions
-  class AnswerCall < Call
+  class AnswerCall < Command
     def execute event, call
       call = create_call(event) if call.nil?
       telnyx_client.answer_call(call.call_control_id)
