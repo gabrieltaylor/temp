@@ -108,7 +108,9 @@ An easy way to do this is via Heroku, instructions for which are included in
 running locally. By default Rails accepts requests on port 3000 so in the example below we are
 creating a tunnel to port 3000.
 
-    % ./ngrok http 3000
+```
+./ngrok http 3000
+```
 
 This will open a tunnel from ngroks server to whatever is running on your localhost on port 3000,
 in this case your call control application.
