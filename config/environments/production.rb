@@ -16,7 +16,6 @@ Rails.application.configure do
   end
   config.active_record.dump_schema_after_migration = false
 
-  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
   config.middleware.use Rack::Deflater
   config.public_file_server.headers = {
     "Cache-Control" => "public, max-age=31557600",

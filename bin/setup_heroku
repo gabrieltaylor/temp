@@ -12,7 +12,6 @@ raise "SUPPORT_PHONE_NUMER not set. Set this environment variable to continue." 
 environment = ENV["ENVIRONMENT"] || "staging"
 
 create_heroku_app(environment)
-set_heroku_application_host(environment)
 set_heroku_rails_secrets(environment)
 set_heroku_telnyx_api_key(environment)
 set_heroku_telnyx_api_secret(environment)
@@ -31,13 +30,6 @@ BEGIN {
   def set_heroku_rails_secrets(environment)
     run_toolbelt_command(
       "config:add SECRET_KEY_BASE=#{generate_secret}",
-      environment,
-    )
-  end
-
-  def set_heroku_application_host(environment)
-    run_toolbelt_command(
-      "config:add APPLICATION_HOST=$(basename $(heroku info -s | grep web_url | cut -d= -f2))",
       environment,
     )
   end
