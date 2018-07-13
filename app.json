@@ -1,11 +1,10 @@
 {
   "name":"telnyx-ivr-example",
-  "scripts":{},
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
   "env":{
     "APP_NAME":{
-      "required":true
-    },
-    "RACK_ENV":{
       "required":true
     },
     "SECRET_KEY_BASE":{
@@ -19,7 +18,9 @@
     },
     "SUPPORT_PHONE_NUMBER":{
       "required":true
-    }
+    },
+    "RAILS_ENV": "production",
+    "RACK_ENV": "production"
   },
   "addons":[
     "heroku-postgresql"
