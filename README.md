@@ -94,8 +94,47 @@ We strongly recommend you DO NOT commit changes to this file to source control
 as this could expose your credentials if your source control service is compromised.
 
 ## Running locally
-If running the application locally you will need to expose your application via a proxy so
-that we can send you events. You can
+If running the application locally, you will need to expose your application via a tunnel, so
+that we can send you the events that occur on the call. To do this you can use a tool like
+[ngrok](https://ngrok.com/).
+
+NOTE: This setup should only be used while developing your applicaton. Once you're
+ready for production you'll want to deploy your application to a server in the cloud.
+An easy way to do this is via Heroku, instructions for which are included in
+[Deploying to Heroku](#Deploying to Heroku) below.
+
+1. Start the tunneling service pointing the tunnel to your application
+running locally. By default Rails accepts requests on port 3000 so in the example below we are
+creating a tunnel to port 3000.
+
+    % ./ngrok http 3000
+
+This will open a tunnel from ngroks server to whatever is running on your localhost on port 3000,
+in this case your call control application.
+
+2. Copy the HTTPS URL displayed in the ngrok session status screen. It will look something
+like this: `https://0eff6122.ngrok.io`.
+
+3. Edit your connection's call control Webhook URL pasting in the URL copied from the ngrok config
+and appening `/events`. This tells call control to send events received on this connection to
+the ngrok URL that will in turn forward the request to your locally running application.
+
+4. You will also need to use the ngrok URL in an environment variable pointing to your ivr menu recording.
+To do this open the `.env` file and edit the IVR_MENU_URL entry to be the ngrok URL with `/files/ivr_menu`
+appended.
+
+    ```
+    IVR_MENU_URL=https://9999999.ngrok.io/files/ivr_menu
+    ```
+
+Be sure to restart your application after editing the environment file.
+
+This value will be used as the URL of the recording to playback for the IVR menu.
+We've included a basic one, but you can easily replace with your own.
+
+
+If you have associated a phone number to your connection you should now be able to call that number
+and see events arriving at your local application.
 
 ## Deploying to Heroku
 
