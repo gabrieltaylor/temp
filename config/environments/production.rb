@@ -16,9 +16,6 @@ Rails.application.configure do
   end
   config.active_record.dump_schema_after_migration = false
 
-  if ENV.fetch("HEROKU_APP_NAME", "").include?("staging")
-    ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
-  end
   config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
   config.middleware.use Rack::Deflater
   config.public_file_server.headers = {

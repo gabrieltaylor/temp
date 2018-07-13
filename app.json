@@ -22,6 +22,9 @@
     },
     "TELNYX_API_SECRET":{
       "required":true
+    },
+    "SUPPORT_PHONE_NUMBER":{
+      "required":true
     }
   },
   "addons":[
