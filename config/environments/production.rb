@@ -22,4 +22,4 @@ Rails.application.configure do
   }
   config.force_ssl = true
 end
-Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
+Rails.application.config.middleware.insert_before Rack::Runtime, Rack::Timeout, service_timeout: (ENV["RACK_TIMEOUT"] || 10).to_i

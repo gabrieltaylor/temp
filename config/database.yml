@@ -12,9 +12,11 @@ test:
   database: ivr_test
 
 production: &deploy
+  adapter: postgresql
   encoding: utf8
   database: ivr_production
   min_messages: warning
+  reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
   pool: <%= [Integer(ENV.fetch("MAX_THREADS", 5)), Integer(ENV.fetch("DB_POOL", 5))].max %>
   timeout: 5000
   url:  <%= ENV.fetch("DATABASE_URL", "") %>
