@@ -85,7 +85,8 @@ IVR_MENU_URL=https://9999999.ngrok.io/files/ivr_menu
 SUPPORT_PHONE_NUMBER=+19999999999
 ```
 
-For local development we recommend setting these values in the `.env` file.
+For local development we recommend setting these values in the `.env` file. This file is
+created by copying the dev.env file when you run `./bin/setup`.
 Values in this file will be automatically exported when you use `heroku local`,
 If you're not using heroku we recommend using [forego](https://github.com/ddollar/forego)
 to export your environment variables by running `forego run rails s`.
@@ -160,3 +161,18 @@ again then run:
 Run `heroku info -s | grep web_url | cut -d= -f2`. This is the URL of your application running on Heroku.
 Append `/events` to the URL and set this as the callback URL on your call control connection. You can do
 this through the [Mission Control Portal](https://portal.telnyx.com).
+
+## Troubleshooting
+
+### Could not connect to server
+
+If you are seeing this error and you are certain postgres is running locally,
+```
+could not connect to server: No such file or directory
+        Is the server running locally and accepting
+        connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
+```
+
+or if you want to connect to postgres without using a Unix socket, uncomment the line in the `.env` file
+that specifies `PGHOST=localhost`. You may also need to set `PGUSER=user` and `PGPASSWORD=password` to
+your postgres username and password.
