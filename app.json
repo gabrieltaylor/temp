@@ -2,7 +2,7 @@
   "name":"telnyx-ivr-example",
   "scripts":{},
   "env":{
-    "HEROKU_APP_NAME": {
+    "APP_NAME":{
       "required":true
     },
     "RACK_ENV":{

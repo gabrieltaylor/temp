@@ -10,7 +10,7 @@ module CallControl::Actions
 
     private
       def audio_url
-        ENV['IVR_MENU_URL']
+        ENV['IVR_MENU_URL'] || "https://#{ENV['APP_NAME']}.herokuapp.com"
       end
   end
 end

@@ -139,7 +139,18 @@ and see events arriving at your local application.
 
 ## Deploying to Heroku
 
+### Quick Deploy
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+1. Input a unique app name
+2. Copy the app name into APP_NAME
+3. Set RACK_ENV=production
+4. Copy your API Key and Secret from the Mission Control Portal
+5. Set the support phone number (don't use the same number you are using to call the IVR)
+6. Click Deploy App
+7. Once deployed click Manage App -> Settings
+8. Copy the domain name shown under Domains and Certificates
+9. Append `/events` to the URL and set it as the webhook URL of your call control connection
 
 ### Staging
 
