@@ -139,7 +139,7 @@ and see events arriving at your local application.
 
 ## Deploying to Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/team-telnyx/call-control-ivr-example)
 
 ### Staging
 
