@@ -12,7 +12,8 @@ module CallControl::Actions
     end
 
     def valid? event, call
-      call.nil? || call.initiated?
+      event.require(:payload).require(:direction) == "incoming" &&
+        call.nil? || call.initiated?
     end
 
     private
