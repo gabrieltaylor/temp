@@ -39,8 +39,9 @@ module CallControl
 
     def call_action(action, call_control_id, body = nil)
       options = {body: body.to_json, basic_auth: @auth}
+      Rails.logger.info("Making #{action} request to Telnyx. Body: #{body}")
       response = self.class.post("/calls/#{call_control_id}/actions/#{action}", options)
-      Rails.logger.debug(response.inspect)
+      Rails.logger.info(response.inspect)
     end
   end
 end
